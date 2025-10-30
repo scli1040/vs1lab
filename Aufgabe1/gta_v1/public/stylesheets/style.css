@@ -171,7 +171,7 @@ form[id="tag-form"] input[type="text"] {
   border-style: solid;
   border-color: var(--border-color);
   padding: 3%;
-  margin-top: 6%;
+  margin-top: 2%;
 }
 
 /* Tagging Form: Submit Button */
@@ -180,7 +180,7 @@ form[id="tag-form"] input[type="submit"] {
   padding-inline: 10%;
   font-size: medium;
   cursor: pointer;
-  margin-top: 6%;
+  margin-top: 2%;
 }
 
 /* Disabled Inputs (Latitude/Longitude) */
@@ -213,7 +213,7 @@ form[id="discoveryFilterForm"] input[type="text"] {
   border-style: solid;
   border-color: var(--border-color);
   padding: 3%;
-  margin-top: 6%;
+  margin-top: 2%;
 }
 
 /* Discovery Form: Submit Button */
@@ -222,7 +222,7 @@ form[id="discoveryFilterForm"] input[type="submit"] {
   padding-inline: 10%;
   font-size: medium;
   cursor: pointer;
-  margin-top: 6%;
+  margin-top: 2%;
 }
 .discovery__wrapper {
   display: flex;

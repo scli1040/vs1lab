@@ -46,12 +46,28 @@ a {
 
 /* ### TODO ### Styles for other HTML elements */
 
+header{
+  background-color: var(--background-color);
+  border: 5px; /*warum wird diese boreder nicht angezeigt??*/
+  border-color: var(--border-color);
+  padding: 30px;
+  align-items: center;
+}
+
 label{
   display: block;
 }
 
 input{
   display:block;
+}
+
+footer{
+  background-color: var(--background-color);
+  border: 5px; /*warum wird diese boreder nicht angezeigt??*/
+  border-color: var(--border-color);
+  padding: 30px;
+  align-items: center;
 }
 
 
@@ -115,21 +131,6 @@ input{
 
 /* ### TODO ### Styles for Header Component */
 
-header{
-  background-color: var(--background-color);
-  border-color: var(--border-color);
-  border: 5px;
-  padding: 50px;
-  height: 400px;
-}
-
-.header__image{
-  float:left;
-}
-
-.header__navigation{
-  float: right;
-}
 
 
 /* ### TODO ### Styles for Main Component */
@@ -164,10 +165,6 @@ main{
 
 /* ### TODO ### Styles for Footer Component */
 
-footer{
-  background-color: var(--background-color);
-  border-color: var(--border-color);
-}
 
 
 /* ### TODO ### Media Queries */

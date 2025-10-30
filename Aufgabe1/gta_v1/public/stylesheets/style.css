@@ -112,7 +112,7 @@ a {
 /* ... your code here ... */
 
 header {
-  background-color: #e8e8e8;
+  background-color: var(--background-color);
   display: flex;
   justify-content:space-between;
   padding-inline: 5%;
@@ -128,90 +128,122 @@ main {
   background-color: #FFF;
   padding: 5%;
   font-family: 'Comic Sans MS';
-  display: flex;
-  gap: 5%;
-  flex-direction: row;
-  flex-basis: 10%;
-  margin: auto;
-    fieldset {
-      display: flex;
-      flex-direction: column;
-    }
+  flex: 1; /* fixt das Problem mit footer-background bei mir */
+}
+
+main .row {
+  gap: 2%;
+}
+.main__tagging,
+.main__discovery {
+  flex: 1; 
 }
 
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
+
+fieldset {
+      display: flex;
+      flex-direction: column;
+    }
+h2 {
+  padding-top: 5%;
+}
+
+/* Tagging Form Basis */
 form[id="tag-form"] {
   padding-top: 1%;
-  fieldset{
-    font-size: large;
-    color: #525252;
-    border-style: solid;
-    border-color: #cdcdcd;
-    padding-left: 5%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-      input[type="text"] {
-        background-color: #fff;
-        border-style: solid;
-        border-color: #cdcdcd;
-        padding: 3%;
-        margin-top: 6%;
-      }
-      input[type="submit"] {
-        padding: 1%;
-        padding-inline: 10%;
-        font-size: medium;
-      }
-      input[id="latitude"] {
-        background-color: #f4f4f4;
-      }
-      input[id="longitude"] {
-        background-color: #f4f4f4;
-      }
-    } 
+}
+
+/* Tagging Form: Fieldset */
+form[id="tag-form"] fieldset {
+  font-size: large;
+  color: var(--gray-color);
+  border-style: solid;
+  border-color: var(--border-color);
+  padding: 1% 5%;
+}
+
+/* Tagging Form: Text Inputs */
+form[id="tag-form"] input[type="text"] {
+  background-color: #fff;
+  border-style: solid;
+  border-color: var(--border-color);
+  padding: 3%;
+  margin-top: 6%;
+}
+
+/* Tagging Form: Submit Button */
+form[id="tag-form"] input[type="submit"] {
+  padding: 1%;
+  padding-inline: 10%;
+  font-size: medium;
+  cursor: pointer;
+  margin-top: 6%;
+}
+
+/* Disabled Inputs (Latitude/Longitude) */
+form[id="tag-form"] input[id="latitude"],
+form[id="tag-form"] input[id="longitude"] {
+  background-color: var(--background-color);
 }
 
 /* ### TODO ### Styles for Discovery component */
 
 /* ... your code here ... */
+
+/* Discovery Form Basis */
 form[id="discoveryFilterForm"] {
   padding-top: 1%;
-  flex-basis: 48%;
-  fieldset{
-    font-size: large;
-    color: #525252;
-    border-style: solid;
-    border-color: #cdcdcd;
-    padding-left: 1%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-      input[type="text"] {
-        background-color: #fff;
-        border-style: solid;
-        border-color: #cdcdcd;
-        padding: 3%;
-        margin-top: 6%;
-      }
-      input[type="submit"] {
-        padding: 1%;
-        padding-inline: 10%;
-        font-size: medium;
-      }
-    } 
+}
+
+/* Discovery Form: Fieldset */
+form[id="discoveryFilterForm"] fieldset {
+  font-size: large;
+  color: var(--gray-color);
+  border-style: solid;
+  border-color: var(--border-color);
+  padding: 1%;
+}
+
+/* Discovery Form: Text Inputs */
+form[id="discoveryFilterForm"] input[type="text"] {
+  background-color: #fff;
+  border-style: solid;
+  border-color: var(--border-color);
+  padding: 3%;
+  margin-top: 6%;
+}
+
+/* Discovery Form: Submit Button */
+form[id="discoveryFilterForm"] input[type="submit"] {
+  padding: 1%;
+  padding-inline: 10%;
+  font-size: medium;
+  cursor: pointer;
+  margin-top: 6%;
+}
+.discovery__wrapper {
+  display: flex;
+  gap: 5%;
+  margin-top: 5%;
 }
 
 li {
-  color: #00B7FF;
-  display: flexbox;
+  color: var(--link-color);
   justify-content: space-around;
-  background-color: #e8e8e8;
+  background-color: var(--background-color);
   border-style: solid;
-  border-color: #c8c8c8;
+  border-color: var(--border-color);
   padding: 2%;
-  margin: 2%;
+  
+  margin: 2% 0%;
   list-style: none;
+}
+
+input:disabled {
+  background-color: var(--background-color);
 }
 
 /* ### TODO ### Styles for Footer Component */
@@ -219,23 +251,36 @@ li {
 /* ... your code here ... */
 
 footer {
-  background-color: #eaeaea;
+  background-color: var(--background-color);
   padding: 5%;
 }
 
 /* ### TODO ### Media Queries */
 
-.header__image  {
-  width: 50px; /*font size*/
-}
 /* ... your code here ... */
 
-.discovery__map {
-  img {
-    display: flex;
-    max-width: device-width;
-  }
+.header__image  {
+  width: 50px;
 }
-@media screen and (max-width=400px) {
-  #sidebar
+
+.discovery__map img {
+    display: block;
+    max-width: auto;
+    max-height: auto;
+}
+
+
+@media screen and (max-width: 1050px) {
+    .row,
+    .discovery__wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* alle Spalten volle Breite */
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+    .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+    .main__tagging, .main__discovery, .discovery__taglist, .discovery__map {
+        width: 100%;
+    }
 }

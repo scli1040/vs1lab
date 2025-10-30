@@ -48,21 +48,29 @@ a {
 
 label{
   display: block;
-  margin: 5px;
+  margin-bottom: 5px;
 }
 
 input{
   display:block;
-  padding: 5px;
-  margin: 5px;
+  width: 200px;
+  padding: 7px;
+  margin-bottom: 15px;
   background-color: var(--background-color);
   border-width: 1px;
   border-color: var(--gray-color);
 }
 
-div.input_block{
-  margin: 10px;
+#submit_tag{
+  margin-bottom: 0px;
+  width: 200px;
 }
+
+fieldset{
+  padding: 20px;
+  margin-top: 10px;
+}
+
 
 /* Grid styles (no changes required) */
 

@@ -108,7 +108,9 @@ a {
 
 
 /* ### TODO ### Styles for Header Component */
-
+header {
+  background-color: #e8e8e8;
+}
 /* ... your code here ... */
 
 
@@ -116,11 +118,37 @@ a {
 
 /* ... your code here ... */
 
+main {
+  background-color: #FFF;
+  padding: 5%;
+  font-family: 'Comic Sans MS';
+}
 
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
-
+form[id="tag-form"] {
+  padding-top: 1%;
+  fieldset{
+    font-size: large;
+    color: #525252;
+    border-style: solid;
+    border-color: #cdcdcd;
+    padding: 1%;
+      input[type="text"] {
+        background-color: #fbfbfb;
+        border-style: solid;
+        border-color: #cdcdcd;
+        padding: 1%;
+        margin: 2%;
+      }
+      input[type="submit"] {
+        padding: 1%;
+        padding-inline: 10%;
+        font-size: medium;
+      }
+    } 
+}
 
 /* ### TODO ### Styles for Discovery component */
 
@@ -129,9 +157,15 @@ a {
 
 /* ### TODO ### Styles for Footer Component */
 
+footer {
+  background-color: #eaeaea;
+}
 /* ... your code here ... */
 
 
 /* ### TODO ### Media Queries */
 
+.header__image  {
+  width: 50px; /*font size*/
+}
 /* ... your code here ... */

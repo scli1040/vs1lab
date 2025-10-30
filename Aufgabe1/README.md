@@ -193,7 +193,7 @@ Das Ergebnis könnte wie folgt aussehen:
 Zur Übersicht folgen noch mal alle Anforderungen in kompakter Form als Checkliste.
 
 ### Teil 0: Teamentwicklung über GitHub
-- [ ] Ein Fork des Repositories ist angelegt und Gruppenmitglieder sind als Collaborators eingeladen
+- [X] Ein Fork des Repositories ist angelegt und Gruppenmitglieder sind als Collaborators eingeladen
 - [ ] Jedes Mitglied der Gruppe hat einen eigenen Branch für eine (Unter-)Aufgabe erstellt
 - [ ] Für jeden Branch existiert ein Pull Request gegen den Default-Branch des Forks (master)
 - [ ] Mindestens ein Review-Kommentar oder ein Approval je PR ist vorhanden
@@ -202,10 +202,10 @@ Zur Übersicht folgen noch mal alle Anforderungen in kompakter Form als Checklis
 ### Teil A: Formulare fertigstellen
 
 - [ ] `Input` Elemente im Tagging- und Discovery-Formular ergänzen
-  - [ ] Felder im Tagging Formular: `latitude`, `longitude`, `name` und `hashtag`
+  - [X] Felder im Tagging Formular: `latitude`, `longitude`, `name` und `hashtag`
   - [ ] Felder im Discovery Formular: `searchterm` sowie `latitude` und `longitude` als versteckte Eingaben
-  - [ ] Eindeutige `id` Attribute für die Felder
-  - [ ] Für alle Felder jeweils ein `label`
+  - [X] Eindeutige `id` Attribute für die Felder
+  - [X] Für alle Felder jeweils ein `label`
   - [ ] Platzhalter für alle Felder
 - [ ] `fieldset` und `legend` zur Begrenzung des Formulars
 - [ ] Für jedes Formular ein Element zum Absenden

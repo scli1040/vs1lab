@@ -108,11 +108,17 @@ a {
 
 
 /* ### TODO ### Styles for Header Component */
-header {
-  background-color: #e8e8e8;
-}
+
 /* ... your code here ... */
 
+header {
+  background-color: #e8e8e8;
+  display: flex;
+  justify-content:space-between;
+  padding-inline: 5%;
+  padding-block: 2%;
+  align-items: center;
+}
 
 /* ### TODO ### Styles for Main Component */
 
@@ -122,6 +128,15 @@ main {
   background-color: #FFF;
   padding: 5%;
   font-family: 'Comic Sans MS';
+  display: flex;
+  gap: 5%;
+  flex-direction: row;
+  flex-basis: 10%;
+  margin: auto;
+    fieldset {
+      display: flex;
+      flex-direction: column;
+    }
 }
 
 /* ### TODO ### Styles for Tagging component */
@@ -134,13 +149,50 @@ form[id="tag-form"] {
     color: #525252;
     border-style: solid;
     border-color: #cdcdcd;
-    padding: 1%;
+    padding-left: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
       input[type="text"] {
-        background-color: #fbfbfb;
+        background-color: #fff;
         border-style: solid;
         border-color: #cdcdcd;
+        padding: 3%;
+        margin-top: 6%;
+      }
+      input[type="submit"] {
         padding: 1%;
-        margin: 2%;
+        padding-inline: 10%;
+        font-size: medium;
+      }
+      input[id="latitude"] {
+        background-color: #f4f4f4;
+      }
+      input[id="longitude"] {
+        background-color: #f4f4f4;
+      }
+    } 
+}
+
+/* ### TODO ### Styles for Discovery component */
+
+/* ... your code here ... */
+form[id="discoveryFilterForm"] {
+  padding-top: 1%;
+  flex-basis: 48%;
+  fieldset{
+    font-size: large;
+    color: #525252;
+    border-style: solid;
+    border-color: #cdcdcd;
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+      input[type="text"] {
+        background-color: #fff;
+        border-style: solid;
+        border-color: #cdcdcd;
+        padding: 3%;
+        margin-top: 6%;
       }
       input[type="submit"] {
         padding: 1%;
@@ -150,18 +202,26 @@ form[id="tag-form"] {
     } 
 }
 
-/* ### TODO ### Styles for Discovery component */
-
-/* ... your code here ... */
-
+li {
+  color: #00B7FF;
+  display: flexbox;
+  justify-content: space-around;
+  background-color: #e8e8e8;
+  border-style: solid;
+  border-color: #c8c8c8;
+  padding: 2%;
+  margin: 2%;
+  list-style: none;
+}
 
 /* ### TODO ### Styles for Footer Component */
 
-footer {
-  background-color: #eaeaea;
-}
 /* ... your code here ... */
 
+footer {
+  background-color: #eaeaea;
+  padding: 5%;
+}
 
 /* ### TODO ### Media Queries */
 
@@ -169,3 +229,13 @@ footer {
   width: 50px; /*font size*/
 }
 /* ... your code here ... */
+
+.discovery__map {
+  img {
+    display: flex;
+    max-width: device-width;
+  }
+}
+@media screen and (max-width=400px) {
+  #sidebar
+}

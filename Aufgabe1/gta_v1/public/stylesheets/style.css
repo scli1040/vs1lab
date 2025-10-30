@@ -46,7 +46,13 @@ a {
 
 /* ### TODO ### Styles for other HTML elements */
 
-/* ... your code here ... */
+label{
+  display: block;
+}
+
+input{
+  display:block;
+}
 
 
 /* Grid styles (no changes required) */
@@ -109,27 +115,59 @@ a {
 
 /* ### TODO ### Styles for Header Component */
 
-/* ... your code here ... */
+header{
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  border: 5px;
+  padding: 50px;
+  height: 400px;
+}
+
+.header__image{
+  float:left;
+}
+
+.header__navigation{
+  float: right;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+main{
+  display:flex;
+  flex-direction: row;
+}
 
 
 /* ### TODO ### Styles for Tagging component */
 
-/* ... your code here ... */
+.tagging{
+  color:#666;
+  /*display: flex;
+  flex-direction: column;*/
+}
 
 
 /* ### TODO ### Styles for Discovery component */
 
-/* ... your code here ... */
+.discovery{
+  display:flex;
+  flex-direction: column;
+}
+
+.discovery__wrapper{
+  display: flex;
+  flex-direction: row;
+}
 
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+footer{
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+}
 
 
 /* ### TODO ### Media Queries */

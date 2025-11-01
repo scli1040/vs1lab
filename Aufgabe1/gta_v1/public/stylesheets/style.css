@@ -144,9 +144,10 @@ main .row {
 /* ... your code here ... */
 
 fieldset {
-      display: flex;
-      flex-direction: column;
-    }
+  display: flex;
+  flex-direction: column;
+}
+
 h2 {
   padding-top: 5%;
 }
@@ -270,11 +271,10 @@ footer {
 }
 
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1000px) {
     .row,
     .discovery__wrapper {
         flex-direction: column;
-        align-items: stretch;
     }
 
     /* alle Spalten volle Breite */
@@ -283,4 +283,5 @@ footer {
     .main__tagging, .main__discovery, .discovery__taglist, .discovery__map {
         width: 100%;
     }
+
 }

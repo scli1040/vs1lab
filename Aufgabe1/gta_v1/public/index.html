@@ -60,7 +60,7 @@
                             name="hashtag" 
                             placeholder="e.g. #ber" 
                             maxlength="11" 
-                            pattern="#.+[A-Za-z]{2-10}">
+                            pattern="#.+[A-Za-z]{2-11}"> <!--pattern wird noch nicht erzwungen-->
 
                     <input type="submit" 
                         id="submit_tag" 
@@ -77,7 +77,10 @@
             <h2 class="discovery__title">Discovery</h2>
 
             <!-- ############### VS1Lab 1a Form 2 Start -->
-            <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
+            <form class="discovery__search" 
+                    id="discoveryFilterForm" 
+                    action="/discovery"
+                     method="post">
 
                 <!-- ... your code here ... -->
                 <fieldset>
@@ -96,7 +99,7 @@
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
 
-            <div class="discovery__wrapper">
+            <div class="discovery__wrapper row" >
                 <div class="discovery__taglist col-4">
                     <ul class="discovery__results" id="discoveryResults">
                         <li>Castle (49.01379, 8.404435) #sight</li>

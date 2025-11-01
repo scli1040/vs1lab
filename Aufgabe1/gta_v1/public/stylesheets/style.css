@@ -134,8 +134,7 @@ fieldset{
 
 header{
   background-color: var(--background-color);
-  border-width: 5px; /*warum wird diese boreder nicht angezeigt??*/
-  border-color: var(--border-color);
+  border: 2px solid var(--border-color);
   padding: 30px;
   align-items: center;
 }
@@ -170,8 +169,7 @@ main{
 
 footer{
   background-color: var(--background-color);
-  border: 5px; /*warum wird diese boreder nicht angezeigt??*/
-  border-color: var(--border-color);
+  border: 2px solid var(--border-color);
   padding: 30px;
   align-items: center;
 }

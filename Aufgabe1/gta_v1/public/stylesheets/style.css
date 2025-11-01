@@ -164,6 +164,17 @@ main{
   flex-direction: row;
 }
 
+li {
+  color: var(--link-color);
+  justify-content: space-around;
+  background-color: var(--background-color);
+  border-style: solid;
+  border-color: var(--border-color);
+  padding: 2%;
+  
+  margin: 2% 0%;
+  list-style: none;
+}
 
 /* ### TODO ### Styles for Footer Component */
 

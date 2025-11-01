@@ -71,7 +71,6 @@ fieldset{
   margin-top: 10px;
 }
 
-
 /* Grid styles (no changes required) */
 
 .row {
@@ -139,6 +138,11 @@ header{
   align-items: center;
 }
 
+/* ruse1011 */
+.header__image  {
+      width: 50px;
+}
+
 /* ### TODO ### Styles for Main Component */
 
 main{
@@ -164,6 +168,16 @@ main{
   flex-direction: row;
 }
 
+/* ruse1011 */
+li {
+  color: var(--link-color);
+  justify-content: space-around;
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
+  padding: 2%;
+  margin: 2% 0%;
+  list-style: none;
+}
 
 /* ### TODO ### Styles for Footer Component */
 
@@ -174,6 +188,29 @@ footer{
   align-items: center;
 }
 
+/* ruse1011 */
+.discovery__map img {
+    display: flex;
+    max-width: 300px;
+    max-height: auto;
+}
+
 /* ### TODO ### Media Queries */
 
 /* ... your code here ... */
+
+/* ruse1011 */
+@media screen and (max-width: 750px) {
+    .row,
+    .discovery__wrapper {
+        flex-direction: column;
+    };
+
+    /* fix für <li> */
+    .col-4 {
+      width: 100%;
+    }
+    .discovery__taglist {
+        width: 100%;
+    }
+}

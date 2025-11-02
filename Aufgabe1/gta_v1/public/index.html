@@ -65,9 +65,10 @@
                             pattern="^#[A-Za-z]{1,10}$"
                             title="Beginne mit '#', gefolgt von bis zu 10 Buchstaben!">
                                                                     <!--pattern fix (ruse1011)-->
-
+                   
+                    <!-- ... submit_search instead of tag, no double id trso1014 ... -->
                     <input type="submit" 
-                        id="submit_tag" 
+                        id="submit_search" 
                         value="Add Tag"> 
                     <!--submit gibt weiter an form handler, angegeben in action-Attribut von form-->
                 </fieldset>
@@ -94,6 +95,11 @@
                             id="searchterm" 
                             name="searchterm" 
                             placeholder="e.g. Berlin">
+                    
+                    <!-- hidden location inputs added trso1014 -->
+                    <input type="hidden" id="discovery-latitude" name="latitude" value="49.01379">
+                    <input type="hidden" id="discovery-longitude" name="longitude" value="8.390071">
+
 
                     <input type="submit" 
                             id="submit_tag" 

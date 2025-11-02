@@ -137,7 +137,7 @@ button:hover {
 
 /* ... your code here ... */
 .header {
-  background-color: #d9efff; 
+  background-color: #cdc4c4; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -161,7 +161,6 @@ button:hover {
 .header__navigation a {
   text-decoration: none;
   color: var(--link-color);
-  margin-left: 0.8rem;
   font-weight: bold;
 }
 
@@ -173,8 +172,8 @@ button:hover {
 .main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Zentriert die Boxen horizontal */
-  gap: 1.5rem; /* größerer Abstand wie im Aufgabenbild */
+  justify-content: center; 
+  gap: 1.5rem; 
   padding: 2rem;
   background-color: var(--background-color);
 }
@@ -236,13 +235,44 @@ button:hover {
   border-radius: 5px;
 }
 
+.discovery__map {
+  flex: 1 1 55%;
+  text-align: center;
+}
+
+.discovery__map img {
+  width: 100%;
+}
+
 
 /* ### TODO ### Styles for Footer Component */
 
 /* ... your code here ... */
+.footer {
+  background-color: #cdc4c4;
+  text-align: center;
+  padding: 1rem;
+  color: #555;
+  font-size: 0.9rem;
+}
 
 
 /* ### TODO ### Media Queries */
 
 /* ... your code here ... */
+@media (max-width: 850px) {
+  .main {
+    flex-direction: column;
+  }
 
+  .discovery__wrapper {
+    flex-direction: column;
+  }
+
+  .main__tagging,
+  .main__discovery,
+  .discovery__taglist,
+  .discovery__map {
+    width: 100%;
+  }
+}

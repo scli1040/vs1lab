@@ -47,6 +47,31 @@ a {
 /* ### TODO ### Styles for other HTML elements */
 
 /* ... your code here ... */
+h1, h2, legend {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+input, button {
+  font-size: 1rem;
+  padding: 0.4rem;
+  margin: 0.3rem 0;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+button {
+  background-color: var(--link-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #0090d1;
+}
 
 
 /* Grid styles (no changes required) */

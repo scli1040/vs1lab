@@ -136,7 +136,7 @@ button:hover {
 
 /* ... your code here ... */
 .header {
-  background-color: #d9efff; /* weiches Hellblau */
+  background-color: #d9efff; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -203,6 +203,10 @@ button:hover {
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
+.tagging label {
+  display: block;
+  margin-top: 0.5rem;
+}
 
 
 

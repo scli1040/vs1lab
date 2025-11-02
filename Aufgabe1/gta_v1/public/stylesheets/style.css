@@ -135,6 +135,38 @@ button:hover {
 /* ### TODO ### Styles for Header Component */
 
 /* ... your code here ... */
+.header {
+  background-color: #e0f4ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid var(--border-color);
+}
+.header__image { width: 40px; height: 40px; }
+.header__title { flex: 1; text-align: center; font-size: 1.8rem; }
+.header__navigation a { text-decoration: none; margin-left: 0.5rem; }
+
+.header__image {
+  width: 40px;
+  height: 40px;
+}
+
+.header__title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.header__navigation a {
+  text-decoration: none;
+  margin-left: 0.5rem;
+  color: var(--link-color);
+  font-weight: bold;
+}
+
 
 
 /* ### TODO ### Styles for Main Component */

@@ -66,6 +66,12 @@ input{
   width: 200px;
 }
 
+/*trso1014*/
+input[type="submit"]:hover {
+  background-color: var(--border-color);
+  cursor: pointer; 
+}
+
 fieldset{
   padding: 20px;
   margin-top: 10px;
@@ -151,21 +157,36 @@ main{
 
 
 /* ### TODO ### Styles for Tagging component */
+/*trso1014*/
+.tagging {
+  gap: 1rem;
+  background-color: white;
+  padding: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+}
 
+.tagging h2 {
+  margin-bottom: 10px;
+  color: var(--gray-color);
+}
 
 
 
 /* ### TODO ### Styles for Discovery component */
 
-.discovery{
-  display:flex;
-  flex-direction: column;
+/*trso1014*/
+.discovery {
+  gap: 1rem;
+  background-color: white;
+  padding: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
 }
 
-
-.discovery__wrapper{
-  display: flex;
-  flex-direction: row;
+.discovery__wrapper {
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 /* ruse1011 */
@@ -188,9 +209,16 @@ footer{
   align-items: center;
 }
 
+/*trso1014*/
+.discovery__map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 /* ruse1011 */
 .discovery__map img {
-    display: flex;
     max-width: 300px;
     max-height: auto;
 }
@@ -200,17 +228,14 @@ footer{
 /* ... your code here ... */
 
 /* ruse1011 */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 950px) {
     .row,
     .discovery__wrapper {
         flex-direction: column;
-    };
-
-    /* fix für <li> */
-    .col-4 {
-      width: 100%;
     }
-    .discovery__taglist {
-        width: 100%;
+    .col-4,
+    .col-8 {
+      width: 100%;
+      margin-bottom: 2%;
     }
 }

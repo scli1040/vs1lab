@@ -232,15 +232,10 @@ footer{
     .row,
     .discovery__wrapper {
         flex-direction: column;
-    };
-
-    .discovery__taglist {
-        width: 100%;
     }
-
     .col-4,
     .col-8 {
       width: 100%;
       margin-bottom: 2%;
-    } 
+    }
 }

@@ -68,7 +68,8 @@ input{
 
 /*trso1014*/
 input[type="submit"]:hover {
-  background-color: #484747;
+  background-color: var(--border-color);
+  cursor: pointer; 
 }
 
 fieldset{
@@ -158,8 +159,6 @@ main{
 /* ### TODO ### Styles for Tagging component */
 /*trso1014*/
 .tagging {
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
   background-color: white;
   padding: 20px;
@@ -178,8 +177,6 @@ main{
 
 /*trso1014*/
 .discovery {
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
   background-color: white;
   padding: 20px;
@@ -188,8 +185,6 @@ main{
 }
 
 .discovery__wrapper {
-  display: flex;
-  flex-direction: row;
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -224,7 +219,6 @@ footer{
 
 /* ruse1011 */
 .discovery__map img {
-    display: flex;
     max-width: 300px;
     max-height: auto;
 }
@@ -234,17 +228,19 @@ footer{
 /* ... your code here ... */
 
 /* ruse1011 */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 950px) {
     .row,
     .discovery__wrapper {
         flex-direction: column;
     };
 
-    /* fix für <li> */
-    .col-4 {
-      width: 100%;
-    }
     .discovery__taglist {
         width: 100%;
     }
+
+    .col-4,
+    .col-8 {
+      width: 100%;
+      margin-bottom: 2%;
+    } 
 }

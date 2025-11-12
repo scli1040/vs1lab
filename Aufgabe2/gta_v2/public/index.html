@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<!-- File origin: VS1LAB A1a -->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoTagApp</title>
+    <link rel="stylesheet" href="./stylesheets/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Leaflet CSS and JavaScript (in this order) -->
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+</head>
+
+<body>
+    <header class="header row">
+        <img src="./images/location.png" class="header__image col-1" alt="an image of a map and location">
+        <h1 class="header__title">GeoTagApp</h1>
+        <nav class="header__navigation">
+            <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
+        </nav>
+    </header>
+
+    <main class="main row">
+        <section class="main__tagging tagging col-4"> 
+            <h2>Tagging</h2>
+
+            <!-- ############### VS1Lab 1a Form 1 Start -->
+            <form id="tag-form" action="/tagging" method="post">
+
+                <!-- ... your code here ... -->
+                <fieldset>
+                    <legend>Add a new GeoTag:</legend>
+
+                    <label for="latitude">Latitude:</label>
+                    <input type="text" 
+                            id="latitude" 
+                            name="latitude" 
+                            value="49.01379" 
+                            readonly>
+                   
+                    <label for="longitude">Longitude:</label>
+                    <input type="text" 
+                            id="longitude" 
+                            name="longitude" 
+                            value="8.390071" 
+                            readonly>
+
+                    <label for="place_name">Name:</label>
+                    <input type="text" 
+                            id="place_name" 
+                            name="place_name" 
+                            placeholder="e.g. Berlin"  
+                            maxlength="10"
+                            pattern="^[A-Za-z]{1,10}$"
+                            title="Verwende nur Buchstaben (max. Eingabelänge: 10)"
+                            required> 
+                  
+                    <label for="hashtag">Hashtag:</label>
+                    <input type="text" 
+                            id="hashtag" 
+                            name="hashtag" 
+                            placeholder="e.g. #ber" 
+                            maxlength="11" 
+                            pattern="^#[A-Za-z]{1,10}$"
+                            title="Beginne mit '#', gefolgt von bis zu 10 Buchstaben!">
+                                                                    <!--pattern fix (ruse1011)-->
+                   
+                    <!-- ... submit_search instead of tag, no double id trso1014 ... -->
+                    <input type="submit" 
+                        id="submit_search" 
+                        value="Add Tag"> 
+                    <!--submit gibt weiter an form handler, angegeben in action-Attribut von form-->
+                </fieldset>
+
+            </form>
+            <!-- ############### VS1Lab 1a Form 1 End -->
+
+        </section>
+
+        <section class="main__discovery discovery col-8" >
+            <h2 class="discovery__title">Discovery</h2>
+
+            <!-- ############### VS1Lab 1a Form 2 Start -->
+            <form class="discovery__search" 
+                    id="discoveryFilterForm" 
+                    action="/discovery"
+                     method="post">
+
+                <!-- ... your code here ... -->
+                <fieldset>
+                    <legend>Search:</legend>
+                    <label for="searchterm">Search Term or Keyword:</label>
+                    <input type="text" 
+                            id="searchterm" 
+                            name="searchterm" 
+                            placeholder="e.g. Berlin">
+                    
+                    <!-- hidden location inputs added trso1014 -->
+                    <input type="hidden" id="discovery-latitude" name="latitude" value="49.01379">
+                    <input type="hidden" id="discovery-longitude" name="longitude" value="8.390071">
+
+
+                    <input type="submit" 
+                            id="submit_tag" 
+                            value="Search"> 
+
+                </fieldset>
+            </form>
+            <!-- ############### VS1Lab 1a Form 2 End -->
+
+            <div class="discovery__wrapper row" >
+                <div class="discovery__taglist col-4">
+                    <ul class="discovery__results" id="discoveryResults">
+                        <li>Castle (49.01379, 8.404435) #sight</li>
+                        <li>IWI (49.01379, 8.390071) #edu</li>
+                    </ul>
+                </div>
+
+                <div id="map" class="discovery__map col-8">
+                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                    <span>Result map</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer row">
+        <span>(c) 2021/22 HKA_IWI_VSYS</span>
+    </footer>
+
+    <!-- Load JavaScripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./javascripts/geotagging.js"></script>
+</body>
+
+</html>

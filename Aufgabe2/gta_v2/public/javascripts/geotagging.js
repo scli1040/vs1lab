@@ -118,7 +118,47 @@ class MapManager {
  */
 // ... your code here ...
 
+function updateLocation() {
+    "use strict";
+    try {
+        //findLocation
+        LocationHelper.findLocation((locationHelper) => {
+            var lat = locationHelper.latitude;
+            var lon = locationHelper.longitude;
+
+            /* latitude/longitude suchen + Koordinaten schreiben */
+
+            //visible inputs
+            var tagLatInput = document.getElementById("latitude");
+            var tagLonInput = document.getElementById("longitude");
+
+            if (tagLatInput) {
+                tagLatInput.value = lat;
+            }
+            if (tagLonInput) {
+                tagLonInput.value = lon;
+            }
+
+            //hidden inputs
+            var discLatInput = document.getElementById("discovery-latitude");
+            var discLonInput = document.getElementById("discovery-longitude");
+
+            if (discLatInput) {
+                discLatInput.value = lat;
+            }
+            if (discLonInput) {
+                discLonInput.value = lon;
+            }
+            console.log("Location aktualisiert: " + lat + ", " + lon);
+        });
+    } catch (err) {
+        console.log("Fehler beim Bestimmen der location");
+    }
+}
+
+//$(document).ready(updateLocation);
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation();
 });

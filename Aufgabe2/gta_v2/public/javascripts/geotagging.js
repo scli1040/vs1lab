@@ -150,10 +150,46 @@ function updateLocation() {
                 discLonInput.value = lon;
             }
             console.log("Location aktualisiert: " + lat + ", " + lon);
+
+                //Teilaufgabe 2
+                try {
+                    var latitude    = document.getElementById("discovery-latitude").value;
+                    var longitude   = document.getElementById("discovery-longitude").value;
+                    var map         = new MapManager();
+
+                    map.initMap(latitude,longitude);
+                    map.updateMarkers(latitude, longitude);
+
+                    /* parent */
+                    var image       = document.getElementById("map");
+                    /* children */
+                    var previousImg = image.getElementsByTagName("img")[0];
+                    var p           = image.getElementsByTagName("p")[0];
+                    var span        = image.getElementsByTagName("span")[0];
+                    
+                    /* 
+                    *   ...wir haben kein <p>. Habs jetzt so gelöst (mit if) für den Fall,
+                    *   dass ein <p> Tag doch irgendwann mal random spawnt
+                    */
+
+                    if (previousImg) {
+                        previousImg.remove();
+                    }
+                    if (p) {
+                        image.removeChild(p);
+                    }
+                    if (span) {
+                        image.removeChild(span);
+                    }
+                    console.log("Map aktualisiert");
+                } catch(err) {
+                    console.log("Fehler beim Erstellen der Map");
+                }
         });
     } catch (err) {
         console.log("Fehler beim Bestimmen der location");
     }
+
 }
 
 //$(document).ready(updateLocation);

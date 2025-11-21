@@ -190,6 +190,8 @@ main{
 .discovery__wrapper {
   gap: 1rem;
   flex-wrap: wrap;
+  flex-direction: row;
+  padding-top: 20px; /* scli1040 */
 }
 
 .discovery h2 {
@@ -217,18 +219,25 @@ footer{
   align-items: center;
 }
 
-/*trso1014*/
+/*trso1014 --> scli1040: hab das wieder raus,
+das hat dafuer gesorgt, dass das Bild unter der 
+Taglist war und nicht daneben
+
 .discovery__map {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
+}*/
+
 
 /* ruse1011 */
 .discovery__map img {
+    display: block; /* scli1040: damit Text unter Bild 
     max-width: 300px;
-    max-height: auto;
+    max-height: auto;*/
+    max-width: 100%;
+    
 }
 
 /* Aufgabe2 */

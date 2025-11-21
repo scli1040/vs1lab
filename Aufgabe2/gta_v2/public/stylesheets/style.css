@@ -230,6 +230,9 @@ Taglist war und nicht daneben
   width: 100%;
 }*/
 
+#map { 
+   height: 500px;
+ } 
 
 /* ruse1011 */
 .discovery__map img {

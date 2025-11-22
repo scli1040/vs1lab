@@ -119,6 +119,7 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(){
+     try {
     
     LocationHelper.findLocation((helper) => {
         var latitude = helper.latitude;
@@ -146,7 +147,9 @@ function updateLocation(){
             discLonInput.value = longitude;
         }    
     });
-
+     } catch (err) {
+        console.log("Fehler beim Bestimmen der location");
+    }
 
 }
 

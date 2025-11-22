@@ -145,12 +145,22 @@ function updateLocation(){
         if (discLonInput) {
             discLonInput.value = longitude;
         }    
+
+        //trso1014
+        //const -> var stays local and can not accept new value to prevent bugs
+        const mapManager = new MapManager();
+        //map init and own position as marker
+        mapManager.initMap(latitude, longitude);
+        mapManager.updateMarkers(latitude, longitude);
+
     });
 
 
 }
 
-// Wait for the page to fully load its DOM content, then call updateLocation
+
+//trso1014
+//function called after all  HTML contents were loaded
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation();   
 });

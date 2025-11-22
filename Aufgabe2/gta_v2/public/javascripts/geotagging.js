@@ -126,14 +126,15 @@ function updateLocation(){
         var longitude = helper.longitude;
 
         //visible inputs
-        var inputLatitude = document.getElementById("latitude");
-        var inputLongitude = document.getElementById("longitude");
+        var formInputLatitude = document.getElementById("latitude");
+        var formInputLongitude = document.getElementById("longitude");
 
-        if (inputLatitude) {
-            inputLatitude.value = latitude;
+        if (formInputLatitude) {
+            formInputLatitude.setAttribute("value", latitude);
         }
-        if (inputLongitude) {
-            inputLongitude.value = longitude;
+
+        if (formInputLongitude) {
+            formInputLongitude.setAttribute("value", longitude);
         }
 
         //hidden inputs
@@ -141,14 +142,45 @@ function updateLocation(){
         var discLonInput = document.getElementById("discovery-longitude");
 
         if (discLatInput) {
-            discLatInput.value = latitude;
+            discLatInput.setAttribute("value", latitude);
         }
         if (discLonInput) {
-            discLonInput.value = longitude;
-        }    
+            discLonInput.setAttribute("value", longitude);
+        }  
+       
+        //Aufgabe 2
+        var map = new MapManager();
+
+        map.initMap(latitude, longitude);
+        map.updateMarkers(latitude, longitude);
+        
     });
-     } catch (err) {
+    
+    } catch (err) {
         console.log("Fehler beim Bestimmen der location");
+    }
+/*
+    //Aufgabe 2
+    var latitude = document.getElementById("latitude").getAttribute("value");
+    var longitude = document.getElementById("longitude").getAttribute("value");
+    var map = new MapManager();
+
+    map.initMap(latitude, longitude);
+    map.updateMarkers(latitude, longitude);
+    */
+   
+     /* parent */
+    var image       = document.getElementById("map");
+    /* children */
+    var previousImg = image.getElementsByTagName("img")[0];
+    var span        = image.getElementsByTagName("span")[0];
+
+    if (previousImg) {
+        previousImg.remove();
+    }
+    
+    if (span) {
+        span.remove();
     }
 
 }

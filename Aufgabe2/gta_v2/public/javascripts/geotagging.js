@@ -118,6 +118,38 @@ class MapManager {
  */
 // ... your code here ...
 
+function updateLocation(){
+    
+    LocationHelper.findLocation((helper) => {
+        var latitude = helper.latitude;
+        var longitude = helper.longitude;
+
+        //visible inputs
+        var inputLatitude = document.getElementById("latitude");
+        var inputLongitude = document.getElementById("longitude");
+
+        if (inputLatitude) {
+            inputLatitude.value = latitude;
+        }
+        if (inputLongitude) {
+            inputLongitude.value = longitude;
+        }
+
+        //hidden inputs
+        var discLatInput = document.getElementById("discovery-latitude");
+        var discLonInput = document.getElementById("discovery-longitude");
+
+        if (discLatInput) {
+            discLatInput.value = latitude;
+        }
+        if (discLonInput) {
+            discLonInput.value = longitude;
+        }    
+    });
+    
+
+}
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     alert("Please change the script 'geotagging.js'");

@@ -146,9 +146,23 @@ function updateLocation(){
             discLonInput.value = longitude;
         }    
     });
-    
+        var map = new MapManager();
+        map.initMap(latitude,longitude);
+        map.updateMarkers(latitude, longitude);
 
-}
+        var image = document.getElementById("map");
+        var previousImg = image.getElementsByTagName("img")[0];
+        var p = image.getElementsByTagName("p")[0];
+        var span = image.getElementsByTagName("span")[0];
+
+        if (previousImg) { previousImg.remove(); }
+        if (p) { image.removeChild(p); }
+        if (span) {
+            image.removeChild(span); }
+        }
+                    
+
+
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {

@@ -119,52 +119,75 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(){
-    
-    LocationHelper.findLocation((helper) => {
-        var latitude = helper.latitude;
-        var longitude = helper.longitude;
+    /* Teilaufgabe 1 */
+    try {
+        LocationHelper.findLocation((helper) => {
+            var latitude = helper.latitude;
+            var longitude = helper.longitude;
 
-        //visible inputs
-        var inputLatitude = document.getElementById("latitude");
-        var inputLongitude = document.getElementById("longitude");
+            //visible inputs
+            var inputLatitude = document.getElementById("latitude");
+            var inputLongitude = document.getElementById("longitude");
 
-        if (inputLatitude) {
-            inputLatitude.value = latitude;
-        }
-        if (inputLongitude) {
-            inputLongitude.value = longitude;
-        }
+            if (inputLatitude) {
+                inputLatitude.value = latitude;
+            }
+            if (inputLongitude) {
+                inputLongitude.value = longitude;
+            }
 
-        //hidden inputs
-        var discLatInput = document.getElementById("discovery-latitude");
-        var discLonInput = document.getElementById("discovery-longitude");
+            //hidden inputs
+            var discLatInput = document.getElementById("discovery-latitude");
+            var discLonInput = document.getElementById("discovery-longitude");
 
-        if (discLatInput) {
-            discLatInput.value = latitude;
-        }
-        if (discLonInput) {
-            discLonInput.value = longitude;
-        }    
+            if (discLatInput) {
+                discLatInput.value = latitude;
+            }
+            if (discLonInput) {
+                discLonInput.value = longitude;
+            }    
+
+            console.log("Location aktualisiert: " + latitude + ", " + longitude); //Testnachricht
+
+
+            /* Teilaufgabe 2 */
+            try {
+                //trso1014
+                //const -> var stays local and can not accept new value to prevent bugs
+                const mapManager = new MapManager();
+                //map init and own position as marker
+                mapManager.initMap(latitude, longitude);
+                mapManager.updateMarkers(latitude, longitude);
+                
+                var discLatInput = document.getElementById("discovery-latitude");
+                var discLonInput = document.getElementById("discovery-longitude");
+                var map = new MapManager();
+                map.initMap(latitude,longitude);
+                map.updateMarkers(latitude, longitude);
+
+                var image = document.getElementById("map");
+                var previousImg = image.getElementsByTagName("img")[0];
+                var p = image.getElementsByTagName("p")[0];
+                var span = image.getElementsByTagName("span")[0];
+
+                previousImg.remove();
+                image.removeChild(span); 
+                if (p) { image.removeChild(p); }
+
+                console.log("Map aktualisiert"); //Testnachricht
+            } catch (error) {
+                console.log("Fehler beim Erstellen der Map");
+            }
     });
-        var map = new MapManager();
-        map.initMap(latitude,longitude);
-        map.updateMarkers(latitude, longitude);
-
-        var image = document.getElementById("map");
-        var previousImg = image.getElementsByTagName("img")[0];
-        var p = image.getElementsByTagName("p")[0];
-        var span = image.getElementsByTagName("span")[0];
-
-        if (previousImg) { previousImg.remove(); }
-        if (p) { image.removeChild(p); }
-        if (span) {
-            image.removeChild(span); }
+    } catch (error) {
+            console.log("Fehler beim Bestimmen der location");
         }
-                    
+
+}
 
 
-
-// Wait for the page to fully load its DOM content, then call updateLocation
+//trso1014
+//function called after all  HTML contents were loaded
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation();   
 });

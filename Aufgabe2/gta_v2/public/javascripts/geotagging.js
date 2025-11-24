@@ -119,42 +119,55 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(){
-    
-    LocationHelper.findLocation((helper) => {
-        var latitude = helper.latitude;
-        var longitude = helper.longitude;
+    /* Teilaufgabe 1 */
+    try {
+        LocationHelper.findLocation((helper) => {
+            var latitude = helper.latitude;
+            var longitude = helper.longitude;
 
-        //visible inputs
-        var inputLatitude = document.getElementById("latitude");
-        var inputLongitude = document.getElementById("longitude");
+            //visible inputs
+            var inputLatitude = document.getElementById("latitude");
+            var inputLongitude = document.getElementById("longitude");
 
-        if (inputLatitude) {
-            inputLatitude.value = latitude;
-        }
-        if (inputLongitude) {
-            inputLongitude.value = longitude;
-        }
+            if (inputLatitude) {
+                inputLatitude.value = latitude;
+            }
+            if (inputLongitude) {
+                inputLongitude.value = longitude;
+            }
 
-        //hidden inputs
-        var discLatInput = document.getElementById("discovery-latitude");
-        var discLonInput = document.getElementById("discovery-longitude");
+            //hidden inputs
+            var discLatInput = document.getElementById("discovery-latitude");
+            var discLonInput = document.getElementById("discovery-longitude");
 
-        if (discLatInput) {
-            discLatInput.value = latitude;
-        }
-        if (discLonInput) {
-            discLonInput.value = longitude;
-        }    
+            if (discLatInput) {
+                discLatInput.value = latitude;
+            }
+            if (discLonInput) {
+                discLonInput.value = longitude;
+            }    
 
-        //trso1014
-        //const -> var stays local and can not accept new value to prevent bugs
-        const mapManager = new MapManager();
-        //map init and own position as marker
-        mapManager.initMap(latitude, longitude);
-        mapManager.updateMarkers(latitude, longitude);
+            console.log("Location aktualisiert: " + latitude + ", " + longitude); //Testnachricht
 
+
+            /* Teilaufgabe 2 */
+            try {
+                //trso1014
+                //const -> var stays local and can not accept new value to prevent bugs
+                const mapManager = new MapManager();
+                //map init and own position as marker
+                mapManager.initMap(latitude, longitude);
+                mapManager.updateMarkers(latitude, longitude);
+
+
+                console.log("Map aktualisiert"); //Testnachricht
+            } catch (error) {
+                console.log("Fehler beim Erstellen der Map");
+            }
     });
-
+    } catch (error) {
+            console.log("Fehler beim Bestimmen der location");
+        }
 
 }
 

@@ -159,20 +159,17 @@ function updateLocation(){
                 mapManager.initMap(latitude, longitude);
                 mapManager.updateMarkers(latitude, longitude);
                 
-                var discLatInput = document.getElementById("discovery-latitude");
-                var discLonInput = document.getElementById("discovery-longitude");
-                var map = new MapManager();
-                map.initMap(latitude,longitude);
-                map.updateMarkers(latitude, longitude);
-
+                //wiph1019
+                // ruft über DOM image, das preset Bild, p und span auf
                 var image = document.getElementById("map");
-                var previousImg = image.getElementsByTagName("img")[0];
+                var presetImage = image.getElementsByTagName("img")[0];
                 var p = image.getElementsByTagName("p")[0];
                 var span = image.getElementsByTagName("span")[0];
 
-                previousImg.remove();
+                // Vorheriges Bild + vorherige Werte werden entfernt
+                presetImage.remove();
                 image.removeChild(span); 
-                if (p) { image.removeChild(p); }
+                if (p) {image.removeChild(p);} // var p existiert bei uns nicht, deswegen if falls es doch vorkommt
 
                 console.log("Map aktualisiert"); //Testnachricht
             } catch (error) {

@@ -158,7 +158,7 @@ function updateLocation(){
                 //map init and own position as marker
                 mapManager.initMap(latitude, longitude);
                 mapManager.updateMarkers(latitude, longitude);
-                
+            
                 //wiph1019
                 // ruft über DOM image, das preset Bild, p und span auf
                 var image = document.getElementById("map");

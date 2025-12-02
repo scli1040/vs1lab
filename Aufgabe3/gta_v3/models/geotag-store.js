@@ -24,8 +24,43 @@
  * - Keyword matching should include partial matches from name or hashtag fields. 
  */
 class InMemoryGeoTagStore{
-
+    
     // TODO: ... your code here ...
+    #store_array = [];
+
+    addGeoTag(geoTag){
+        if (geoTag != undefined){
+            var r = 0; 
+            while (this.#store_array[r] != undefined){
+                r++;
+            }
+            this.#store_array[r] = geoTag;
+
+        }
+
+    };
+
+    removeGeoTag(geoTag){
+        var geoTag_name = geoTag.tag_name;
+        var array_length = this.#store_array.length;
+
+        for ( var i = 0 ; i < array_length; i++){
+            if (this.#store_array[i].tag_name === geoTag_name){
+                break;
+            }
+        }
+
+        if (i < array_length){
+            this.#store_array[i] = undefined;
+        } else {
+            console.log("GeoTag nicht enthalten.");
+        }
+
+    };
+
+    getNearbyGeoTags(location){
+
+    }
 
 }
 

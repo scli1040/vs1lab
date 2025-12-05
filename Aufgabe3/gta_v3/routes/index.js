@@ -42,8 +42,8 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  const latitude = req.body.Latitude || ''; 
-  const longitude = req.body.Longitude || '';
+  const latitude = req.body.latitude || ''; 
+  const longitude = req.body.longitude || '';
 
   const taglist = geoTagStore.getNearbyGeoTags(latitude, longitude, 100); // default radius = 100
   console.log('Nearby taglist:', taglist);
@@ -70,14 +70,14 @@ router.get('/', (req, res) => {
 router.post('/tagging',(req, res) => {
   console.log("Route to Tagging ...");
   console.log(req.body);
-  const latitude = req.body.Latitude || ''; 
-  const longitude = req.body.Longitude || ''; 
+  const latitude = req.body.latitude || ''; 
+  const longitude = req.body.longitude || ''; 
   console.log("Lat:" +latitude);
   console.log("Long: "+longitude);
-  console.log("name: "+ req.body.Name);
-  console.log("hashtag: "+ req.body.Hashtag);
+  console.log("name: "+ req.body.name);
+  console.log("hashtag: "+ req.body.hashtag);
 
-  const newTag = new GeoTag(req.body.Name,latitude, longitude, req.body.Hashtag); // create new Tag
+  const newTag = new GeoTag(req.body.name,latitude, longitude, req.body.hashtag); // create new Tag
   geoTagStore.addGeoTag(newTag); // add new tag to taglist
   //const taglist = geoTagStore.getNearbyGeoTags(latitude, longitude, 100); // default radius = 100
   const taglist = geoTagStore.taglist;
@@ -106,14 +106,14 @@ router.post('/tagging',(req, res) => {
 // TODO: ... your code here ...
 
 router.post('/discovery', (req, res) => {
-  const { Latitude, Longitude, searchterm } = req.body;
-  let results = geoTagStore.getNearbyGeoTags(Latitude, Longitude,100);
+  const { latitude, longitude, searchterm } = req.body;
+  let results = geoTagStore.getNearbyGeoTags(latitude, longitude,100);
 
   if(searchterm){
-    results = geoTagStore.searchNearbyGeoTags(Latitude, Longitude, 100, searchterm);
+    results = geoTagStore.searchNearbyGeoTags(latitude, longitude, 100, searchterm);
   }
 
-  res.render('index', { taglist: results, searchTerm: searchterm, latitude: Latitude, longitude: Longitude});
+  res.render('index', { taglist: results, searchTerm: searchterm, latitude: latitude, longitude: longitude});
 });
 
 

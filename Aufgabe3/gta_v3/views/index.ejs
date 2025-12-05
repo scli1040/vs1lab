@@ -46,14 +46,16 @@
                     <input type="text" 
                             id="latitude" 
                             name="latitude" 
-                            value="49.01379" 
+                            value="<%= latitude %>"
+                            placeholder="41.40338"
+
                             readonly>
                    
                     <label for="longitude">Longitude:</label>
                     <input type="text" 
                             id="longitude" 
                             name="longitude" 
-                            value="8.390071" 
+                            value="<%= longitude %>" 
                             readonly>
 
                     <label for="place_name">Name:</label>
@@ -107,8 +109,8 @@
                             placeholder="e.g. Berlin">
                     
                     <!-- hidden location inputs added trso1014 -->
-                    <input type="hidden" id="discovery-latitude" name="latitude" value="49.01379">
-                    <input type="hidden" id="discovery-longitude" name="longitude" value="8.390071">
+                    <input type="hidden" id="discovery-latitude" name="latitude" value="<%= latitude %>">
+                    <input type="hidden" id="discovery-longitude" name="longitude" value="<%= longitude %>">
 
 
                     <input type="submit" 
@@ -128,7 +130,7 @@
                     </ul>
                 </div>
 
-                <div id="map" class="discovery__map col-8">
+                <div id="map" class="discovery__map col-8"> 
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
                     <span>Result map</span>
                 </div>

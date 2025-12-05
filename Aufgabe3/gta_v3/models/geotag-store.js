@@ -31,7 +31,7 @@ class InMemoryGeoTagStore{
     addGeoTag(geoTag){
         this.#geoTag_array.push(geoTag);
 
-    };
+    }
 
     removeGeoTagn(tagName){
        
@@ -41,8 +41,8 @@ class InMemoryGeoTagStore{
                     this.#geoTag_array.splice(this.#geoTag_array.findIndex(element),1);
                 }
             }
-        }            
-    };
+        });            
+    }
 
     getNearbyGeoTags(latitude, longitude,radius=1){
         return this.#geoTag_array.filter(tag => {
@@ -51,7 +51,7 @@ class InMemoryGeoTagStore{
             )
             return distance <= radius;
         })
-    };
+    }
 
     searchNearbyGeoTags(latitude,longitude,radius,keyword){
         return this.#geoTag_array.filter(geotag => {
@@ -65,7 +65,7 @@ class InMemoryGeoTagStore{
             console.log("hashtag: "+hashtagMatch);
             return distance <= radius && (nameMatch || hashtagMatch);
         });
-    };
+    }
 
 
     haversineDistance(lat1, lon1, lat2, lon2, radius = 6371) {

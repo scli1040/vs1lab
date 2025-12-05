@@ -28,6 +28,25 @@ class InMemoryGeoTagStore{
     // TODO: ... your code here ...
     #geoTag_array = [];
 
+    #geoTagExamples = GeoTagExamples.tagList;
+    
+    get taglist() { return this.#geoTag_array; }
+
+    constructor(){
+        this.#geoTag_array = [];
+
+        this.loadExamples();
+    }
+
+    loadExamples(){
+        for (var tag in this.#geoTagExamples) {
+            
+            this.addGeoTag(new GeoTag(this.#geoTagExamples[tag][0], this.#geoTagExamples[tag][1], this.#geoTagExamples[tag][2], this.#geoTagExamples[tag][3]));
+        }
+    }
+
+
+
     addGeoTag(geoTag){
         this.#geoTag_array.push(geoTag);
 

@@ -26,42 +26,67 @@
 class InMemoryGeoTagStore{
     
     // TODO: ... your code here ...
-    #store_array = [];
+    #geoTag_array = [];
 
     addGeoTag(geoTag){
-        if (geoTag != undefined){
-            var r = 0; 
-            while (this.#store_array[r] != undefined){
-                r++;
-            }
-            this.#store_array[r] = geoTag;
-
-        }
+        this.#geoTag_array.push(geoTag);
 
     };
 
-    removeGeoTag(geoTag){
-        var geoTag_name = geoTag.tag_name;
-        var array_length = this.#store_array.length;
-
-        for ( var i = 0 ; i < array_length; i++){
-            if (this.#store_array[i].tag_name === geoTag_name){
-                break;
+    removeGeoTagn(tagName){
+       
+        this.#geoTag_array.forEach(element => {
+            if(element != null){
+                if(element.name==tagName){
+                    this.#geoTag_array.splice(this.#geoTag_array.findIndex(element),1);
+                }
             }
-        }
-
-        if (i < array_length){
-            this.#store_array[i] = undefined;
-        } else {
-            console.log("GeoTag nicht enthalten.");
-        }
-
+        }            
     };
 
-    getNearbyGeoTags(location){
+    getNearbyGeoTags(latitude, longitude,radius=1){
+        return this.#geoTag_array.filter(tag => {
+            const distance = this.haversineDistance(
+                latitude, longitude, tag.latitude, tag.longitude
+            )
+            return distance <= radius;
+        })
+    };
 
+    searchNearbyGeoTags(latitude,longitude,radius,keyword){
+        return this.#geoTag_array.filter(geotag => {
+
+            console.log(geotag.name);
+
+            const distance = this.haversineDistance(latitude, longitude, geotag.latitude, geotag.longitude);
+            const nameMatch = geotag.name.toLowerCase().includes(keyword.toLowerCase());
+            const hashtagMatch = geotag.hashtag.toLowerCase().includes(keyword.toLowerCase());
+            console.log("namematch: "+nameMatch);
+            console.log("hashtag: "+hashtagMatch);
+            return distance <= radius && (nameMatch || hashtagMatch);
+        });
+    };
+
+
+    haversineDistance(lat1, lon1, lat2, lon2, radius = 6371) {
+        const toRadians = (degree) => degree * (Math.PI / 180);
+    
+        const dLat = toRadians(lat2 - lat1);
+        const dLon = toRadians(lon2 - lon1);
+    
+        const lat1Rad = toRadians(lat1);
+        const lat2Rad = toRadians(lat2);
+    
+        const a = Math.sin(dLat / 2) ** 2 +
+                  Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) ** 2;
+    
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        console.log("c: "+ c + "    radius: " + radius+ "    Erg: " + radius*c );
+        return radius * c; // Distanz in Kilometern
     }
 
-}
+
+
+};
 
 module.exports = InMemoryGeoTagStore

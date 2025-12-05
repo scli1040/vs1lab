@@ -42,7 +42,12 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  const latitude = req.body.Latitude || ''; 
+  const longitude = req.body.Longitude || '';
+
+  const taglist = geoTagStore.getNearbyGeoTags(latitude, longitude, 100); // default radius = 100
+  console.log('Nearby taglist:', taglist);
+  res.render('index', { taglist, latitude, longitude}); 
 });
 
 /**
@@ -62,6 +67,26 @@ router.get('/', (req, res) => {
 
 // TODO: ... your code here ...
 
+router.post('/tagging',(req, res) => {
+  console.log("Route to Tagging ...");
+  console.log(req.body);
+  const latitude = req.body.Latitude || ''; 
+  const longitude = req.body.Longitude || ''; 
+  console.log("Lat:" +latitude);
+  console.log("Long: "+longitude);
+  console.log("name: "+ req.body.Name);
+  console.log("hashtag: "+ req.body.Hashtag);
+
+  const newTag = new GeoTag(req.body.Name,latitude, longitude, req.body.Hashtag); // create new Tag
+  geoTagStore.addGeoTag(newTag); // add new tag to taglist
+  //const taglist = geoTagStore.getNearbyGeoTags(latitude, longitude, 100); // default radius = 100
+  const taglist = geoTagStore.taglist;
+  console.log('taglist:', taglist);
+  res.render('index', { taglist, latitude, longitude}); 
+
+});
+
+
 /**
  * Route '/discovery' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -79,5 +104,17 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+
+router.post('/discovery', (req, res) => {
+  const { Latitude, Longitude, searchterm } = req.body;
+  let results = geoTagStore.getNearbyGeoTags(Latitude, Longitude,100);
+
+  if(searchterm){
+    results = geoTagStore.searchNearbyGeoTags(Latitude, Longitude, 100, searchterm);
+  }
+
+  res.render('index', { taglist: results, searchTerm: searchterm, latitude: Latitude, longitude: Longitude});
+});
+
 
 module.exports = router;

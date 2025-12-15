@@ -105,7 +105,14 @@
                             id="searchterm" 
                             name="searchterm" 
                             placeholder="e.g. Berlin">
-                    
+
+                    <label for="radius">Search radius (in km):</label>
+                    <input type="text" 
+                            id="radius" 
+                            name="radius" 
+                            value="10"
+                            required>
+
                     <!-- hidden location inputs added trso1014 -->
                     <input type="hidden" id="discovery-latitude" name="latitude" value="<%= latitude || 49.01379 %>">
                     <input type="hidden" id="discovery-longitude" name="longitude" value="<%= longitude || 8.390071 %>">
@@ -145,6 +152,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./javascripts/geotagging.js"></script>
+    <script src="./javascripts/location-helper.js"></script>
+    <script src="./javascripts/map-manager.js"></script>
+
 </body>
 
 </html>

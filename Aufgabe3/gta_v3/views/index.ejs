@@ -46,14 +46,14 @@
                     <input type="text" 
                             id="latitude" 
                             name="latitude" 
-                            value="49.01379" 
+                            value="<%= latitude || 49.01379 %>"
                             readonly>
                    
                     <label for="longitude">Longitude:</label>
                     <input type="text" 
                             id="longitude" 
                             name="longitude" 
-                            value="8.390071" 
+                            value="<%= longitude || 8.390071 %>"  
                             readonly>
 
                     <label for="place_name">Name:</label>
@@ -107,8 +107,8 @@
                             placeholder="e.g. Berlin">
                     
                     <!-- hidden location inputs added trso1014 -->
-                    <input type="hidden" id="discovery-latitude" name="latitude" value="49.01379">
-                    <input type="hidden" id="discovery-longitude" name="longitude" value="8.390071">
+                    <input type="hidden" id="discovery-latitude" name="latitude" value="<%= latitude || 49.01379 %>">
+                    <input type="hidden" id="discovery-longitude" name="longitude" value="<%= longitude || 8.390071 %>">
 
 
                     <input type="submit" 

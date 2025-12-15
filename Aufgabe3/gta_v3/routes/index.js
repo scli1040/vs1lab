@@ -1,11 +1,3 @@
-// File origin: VS1LAB A3
-
-/**
- * This script defines the main router of the GeoTag server.
- * It's a template for exercise VS1lab/Aufgabe3
- * Complete all TODOs in the code documentation.
- */
-
 /**
  * Define module dependencies.
  */
@@ -31,6 +23,18 @@ const GeoTag = require('../models/geotag');
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
 
+const InMemoryGeoTagStore = require('../models/geotag-store');
+const GeoTagExamples = require('../models/geotag-examples');
+
+// Initialize Store and populate with examples
+const store = new InMemoryGeoTagStore();
+const exampleList = GeoTagExamples.tagList;
+exampleList.forEach(tagData => {
+    // tagData format: [name, latitude, longitude, hashtag]
+    const newTag = new GeoTag(tagData[0], tagData[1], tagData[2], tagData[3]);
+    store.addGeoTag(newTag);
+});
+
 /**
  * Route '/' for HTTP 'GET' requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
@@ -42,9 +46,12 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  res.render('index', { 
+      taglist: [], 
+      latitude: null, 
+      longitude: null 
+  });
 });
-
 /**
  * Route '/tagging' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -61,6 +68,23 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+
+router.post('/tagging', (req, res) => {
+    const { name, latitude, longitude, hashtag } = req.body;
+    
+    const newTag = new GeoTag(name, latitude, longitude, hashtag);
+    store.addGeoTag(newTag);
+
+    // Search radius in km (approx)
+    const radius = req.body.radius || 10;
+    const nearbyTags = store.getNearbyGeoTags(latitude, longitude, radius);
+
+    res.render('index', { 
+        taglist: nearbyTags, 
+        latitude: latitude, 
+        longitude: longitude 
+    });
+});
 
 /**
  * Route '/discovery' for HTTP 'POST' requests.
@@ -79,5 +103,22 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+
+router.get('/discovery', (req, res) => {
+  res.redirect('/');
+});
+
+router.post('/discovery', (req, res) => {
+    const {name, latitude, longitude, searchterm } = req.body;
+    
+    const radius = req.body.radius || 10;
+    const nearbyTags = store.searchNearbyGeoTags(latitude, longitude, radius, searchterm);
+
+    res.render('index', { 
+        taglist: nearbyTags, 
+        latitude: latitude, 
+        longitude: longitude 
+    });
+});
 
 module.exports = router;

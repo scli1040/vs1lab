@@ -105,6 +105,13 @@
                             id="searchterm" 
                             name="searchterm" 
                             placeholder="e.g. Berlin">
+
+                    <label for="radius">Search radius (in km):</label>
+                    <input type="text" 
+                            id="radius" 
+                            name="radius" 
+                            value="10"
+                            required>
                     
                     <!-- hidden location inputs added trso1014 -->
                     <input type="hidden" id="discovery-latitude" name="latitude" value="<%= latitude || 49.01379 %>">

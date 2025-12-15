@@ -113,6 +113,10 @@ router.post('/tagging', (req, res) => {
 
 // TODO: ... your code here ...
 
+router.get('/discovery', (req, res) => {
+  res.redirect('/');
+});
+
 router.post('/discovery', (req, res) => {
     const { latitude, longitude, searchterm } = req.body;
     

@@ -116,7 +116,7 @@ router.post('/tagging', (req, res) => {
 router.post('/discovery', (req, res) => {
     const { latitude, longitude, searchterm } = req.body;
     
-    const radius = 1000; // km
+    const radius = req.body.radius || 10; // Ändern Sie 1000 zu 10
     const nearbyTags = store.searchNearbyGeoTags(latitude, longitude, radius, searchterm);
 
     res.render('index', { 

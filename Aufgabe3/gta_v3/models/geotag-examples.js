@@ -11,12 +11,17 @@
  * TODO: populate your InMemoryGeoTagStore with these tags
  * 
  */
+
+const InMemoryGeoTagStore = require("./geotag-store");
+
 class GeoTagExamples {
     /**
      * Provides some geoTag data
      */
     static get tagList() {
         return [
+            ['test', 48.78619, 8.31327, '#test'],
+
             ['Castle', 49.013790, 8.404435, '#sight'],
             ['IWI', 49.013790, 8.390071, '#edu'],
             ['Building E', 49.014993, 8.390049, '#campus'],

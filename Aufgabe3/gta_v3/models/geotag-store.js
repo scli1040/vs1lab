@@ -64,6 +64,8 @@ class InMemoryGeoTagStore{
         );
     }
 
+    /* Haversine Formel */
+    
     #calculateDistance(lat1, lon1, lat2, lon2) {
         const R = 6371; // Radius der Erde in km
         const dLat = this.#deg2rad(lat2 - lat1);

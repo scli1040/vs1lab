@@ -11,6 +11,9 @@
  * TODO: populate your InMemoryGeoTagStore with these tags
  * 
  */
+
+const InMemoryGeoTagStore = require("./geotag-store");
+
 class GeoTagExamples {
     /**
      * Provides some geoTag data

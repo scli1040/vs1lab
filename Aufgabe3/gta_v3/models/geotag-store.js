@@ -26,6 +26,47 @@
 class InMemoryGeoTagStore{
 
     // TODO: ... your code here ...
+    #geoTags = [];
+
+    constructor() {
+        this.#geoTags = [];
+    }
+
+    addGeoTag(geotag) {
+        this.#geoTags.push(geotag);
+    }
+
+    removeGeoTag(name) {
+        this.#geoTags = this.#geoTags.filter(tag => tag.name !== name);
+    }
+
+    getNearbyGeoTags(latitude, longitude, radius) {
+        return this.#geoTags.filter(tag => {
+            const distance = this.#calculateDistance(latitude, longitude, tag.latitude, tag.longitude);
+            return distance <= radius;
+        });
+    }
+
+    searchNearbyGeoTags(latitude, longitude, radius, keyword) {
+        const nearbyTags = this.getNearbyGeoTags(latitude, longitude, radius);
+
+        if (!keyword) {
+            return nearbyTags;
+        }
+
+        const searchTerm = keyword.toLowerCase();
+
+        return nearbyTags.filter(tag => 
+            (tag.name && tag.name.toLowerCase().includes(searchTerm)) ||
+            (tag.hashtag && tag.hashtag.toLowerCase().includes(searchTerm))
+        );
+    }
+
+    #calculateDistance(lat1, lon1, lat2, lon2) {
+        const dx = lat2 - lat1;
+        const dy = lon2 - lon1;
+        return Math.sqrt(dx * dx + dy * dy) * 111;
+    }
 
 }
 

@@ -184,6 +184,9 @@ async function handleDiscoveryForm(event) {
         url += "&searchterm=" + encodeURIComponent(searchterm);
     }
 
+    // Überprüfung AJAX-Aufruf
+    console.log("Sending AJAX request to:", url);
+
     try {
         var response = await fetch(url, {
             method: "GET",
@@ -209,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event Listener
     var tagForm = document.getElementById("tag-form");
-    var discoveryForm = document.getElementById("discovery-form"); 
+    var discoveryForm = document.getElementById("discoveryFilterForm"); 
 
     if (tagForm) {
         tagForm.addEventListener("submit", handleTagForm);

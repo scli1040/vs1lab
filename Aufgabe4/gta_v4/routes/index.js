@@ -190,7 +190,7 @@ router.post('/api/geotags', (req, res) => {
   const newTag = new GeoTag(name, latitude, longitude, hashtag);
   store.addGeoTag(newTag);
   
-  res.status(201)
+  res.status(201) //201: created
      .location(`/api/geotags/${newTag.id}`)
      .json(newTag);
 });

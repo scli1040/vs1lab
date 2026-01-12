@@ -1,4 +1,4 @@
-# Neuen GeoTag erstellen
+### Neuen GeoTag erstellen
 POST http://localhost:3000/api/geotags
 Content-Type: application/json
 
@@ -13,17 +13,17 @@ Content-Type: application/json
 @geotagId = 13
 
 
-# Alle GeoTags abrufen
+### Alle GeoTags abrufen
 GET http://localhost:3000/api/geotags
 
-# Sucht nach GeoTags in der Nähe (mit Koordinaten und Suchbegriff "rest")
+### Sucht nach GeoTags in der Nähe (mit Koordinaten und Suchbegriff "rest")
 GET http://localhost:3000/api/geotags?latitude=49.014&longitude=8.404&searchterm=rest
 
-# Geotag anhand der ID abrufen
+### Geotag anhand der ID abrufen
 GET http://localhost:3000/api/geotags/{{geotagId}}
 
 
-# GeoTag ändern
+### GeoTag ändern
 PUT http://localhost:3000/api/geotags/{{geotagId}}
 Content-Type: application/json
 
@@ -35,12 +35,12 @@ Content-Type: application/json
 }
 
 
-# Änderung prüfen
+### Änderung prüfen
 GET http://localhost:3000/api/geotags/{{geotagId}}
 
 
-# Geotag anhand ID löschen
+### Geotag anhand ID löschen
 DELETE http://localhost:3000/api/geotags/{{geotagId}}
 
-# Änderung prüfen
+### Änderung prüfen
 GET http://localhost:3000/api/geotags/{{geotagId}}

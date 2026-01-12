@@ -12,7 +12,8 @@
 class GeoTag {
 
     // TODO: ... your code here ...
-    constructor(name, latitude, longitude, hashtag){
+    constructor(name, latitude, longitude, hashtag) {
+        this.id = undefined; //Neuer Primärschlüssel
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

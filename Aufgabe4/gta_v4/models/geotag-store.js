@@ -27,17 +27,52 @@ class InMemoryGeoTagStore{
 
     // TODO: ... your code here ...
     #geoTags = [];
+    #nextId = 1;
 
     constructor() {
         this.#geoTags = [];
+        this.#nextId = 1;
     }
 
     addGeoTag(geotag) {
+        geotag.id = this.#nextId++;
         this.#geoTags.push(geotag);
     }
 
     removeGeoTag(name) {
         this.#geoTags = this.#geoTags.filter(tag => tag.name !== name);
+    }
+    
+    removeGeoTagById(id) {
+        // id zu einer Nummer umwandeln
+        const numericId = Number(id);
+        const index = this.#geoTags.findIndex(tag => tag.id === numericId);
+        if (index !== -1) {
+            this.#geoTags.splice(index, 1);
+            return true;
+        }
+        return false;
+    }
+
+    getAllGeoTags() {
+        return this.#geoTags;
+    }
+
+    getGeoTag(id) {
+        const numericId = Number(id);
+        return this.#geoTags.find(tag => tag.id === numericId);
+    }
+
+    updateGeoTag(id, newTag) {
+        const numericId = Number(id);
+        const index = this.#geoTags.findIndex(tag => tag.id === numericId);
+        if (index !== -1) {
+            // ID behalten & nur die Felder aktualisieren
+            newTag.id = numericId; 
+            this.#geoTags[index] = newTag;
+            return newTag;
+        }
+        return null;
     }
 
     getNearbyGeoTags(latitude, longitude, radius) {

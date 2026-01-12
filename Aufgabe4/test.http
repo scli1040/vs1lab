@@ -1,0 +1,46 @@
+# Neuen GeoTag erstellen
+POST http://localhost:3000/api/geotags
+Content-Type: application/json
+
+{
+    "name": "REST Test",
+    "latitude": 49.01379,
+    "longitude": 8.404435,
+    "hashtag": "#rest"
+}
+
+### Hier für nachfolgenden Tests Variable setzen (je nach dem welche ID der letzte Geotag enthält)
+@geotagId = 13
+
+
+# Alle GeoTags abrufen
+GET http://localhost:3000/api/geotags
+
+# Sucht nach GeoTags in der Nähe (mit Koordinaten und Suchbegriff "rest")
+GET http://localhost:3000/api/geotags?latitude=49.014&longitude=8.404&searchterm=rest
+
+# Geotag anhand der ID abrufen
+GET http://localhost:3000/api/geotags/{{geotagId}}
+
+
+# GeoTag ändern
+PUT http://localhost:3000/api/geotags/{{geotagId}}
+Content-Type: application/json
+
+{
+    "name": "REST Test Updated",
+    "latitude": 49.01379,
+    "longitude": 8.404435,
+    "hashtag": "#rest_updated"
+}
+
+
+# Änderung prüfen
+GET http://localhost:3000/api/geotags/{{geotagId}}
+
+
+# Geotag anhand ID löschen
+DELETE http://localhost:3000/api/geotags/{{geotagId}}
+
+# Änderung prüfen
+GET http://localhost:3000/api/geotags/{{geotagId}}

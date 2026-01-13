@@ -131,7 +131,7 @@ function updateView(tagList) {
 /**
  * AJAX Handler for Tagging Form
  */
-async function handleTagForm(event) {
+async function handleTagForm() {
     
     var lat = document.getElementById("latitude").value;
     var lon = document.getElementById("longitude").value;
@@ -168,9 +168,9 @@ async function handleTagForm(event) {
         )
 
         if(nearbyGeoTagsRes.ok){
-        console.log("Got nearby Tags");
-        const nearbyGeoTags = await nearbyGeoTagsRes.json();
-        updateView(nearbyGeoTags);
+            console.log("Got nearby Tags");
+            const nearbyGeoTags = await nearbyGeoTagsRes.json();
+            updateView(nearbyGeoTags);
         }        
     }
     else{
@@ -182,7 +182,7 @@ async function handleTagForm(event) {
 /**
  * AJAX Handler for Discovery Form
  */
-async function handleDiscoveryForm(event) {
+async function handleDiscoveryForm() {
 
     var lat = document.getElementById("discovery-latitude").value;
     var lon = document.getElementById("discovery-longitude").value;

@@ -3,21 +3,21 @@ POST http://localhost:3000/api/geotags
 Content-Type: application/json
 
 {
-    "name": "REST Test",
+    "name": "REST Test2",
     "latitude": 49.01379,
     "longitude": 8.404435,
-    "hashtag": "#rest"
+    "hashtag": "#rest2"
 }
 
 ### Hier für nachfolgenden Tests Variable setzen (je nach dem welche ID der letzte Geotag enthält)
-@geotagId = 13
+@geotagId = 15
 
 
 ### Alle GeoTags abrufen
 GET http://localhost:3000/api/geotags
 
 ### Sucht nach GeoTags in der Nähe (mit Koordinaten und Suchbegriff "rest")
-GET http://localhost:3000/api/geotags?latitude=49.014&longitude=8.404&searchterm=rest
+GET http://localhost:3000/api/geotags?latitude=49.014&longitude=8.404&searchterm=rest2
 
 ### Geotag anhand der ID abrufen
 GET http://localhost:3000/api/geotags/{{geotagId}}

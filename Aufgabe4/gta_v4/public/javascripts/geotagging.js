@@ -131,8 +131,8 @@ function updateView(tagList) {
 /**
  * AJAX Handler for Tagging Form
  */
-async function handleTagForm(event) {
-    event.preventDefault(); // Standard-Submit wird hier verhindert
+function handleTagForm(event) {
+    if (event)event.preventDefault(); // Standard-Submit wird hier verhindert
 
     var lat = document.getElementById("latitude").value;
     var lon = document.getElementById("longitude").value;
@@ -147,32 +147,32 @@ async function handleTagForm(event) {
         name: name,
         hashtag: hashtag
     };
+    doItTagForm(geotag).then(
+        function(result) {console.log("Erfolg")}, 
+        function(result) {console.log("Fehler")}
+    );
+}
 
-    try {
-        var response = await fetch("/api/geotags", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(geotag)
-        });
+async function doItTagForm (geotag) {
+    var response = await fetch("/api/geotags", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(geotag)
+    });
 
-        if (response.status === 201) { // Created
-            console.log("GeoTag created.");
-            // Liste aktualisieren durch Suche auslösen (ohne Suchbegriff = Umgebungssuche)
-            handleDiscoveryForm(null); 
-        } else {
-            console.log("Error creating GeoTag");
-        }
-    } catch (e) {
-        console.log("Fetch Error: " + e);
+    if (response.status === 201) { // Created
+        console.log("GeoTag created.");
+    } else {
+        console.log("Error creating GeoTag");
     }
 }
 
 /**
  * AJAX Handler for Discovery Form
  */
-async function handleDiscoveryForm(event) {
+async function handleDiscoveryForm(event, geotag) {
     if (event) event.preventDefault();
 
     var lat = document.getElementById("discovery-latitude").value;
@@ -187,8 +187,12 @@ async function handleDiscoveryForm(event) {
 
     // Überprüfung AJAX-Aufruf
     console.log("Sending AJAX request to:", url);
+    doItDiscoveryForm(geotag).then(
+        function(result) {console.log("Erfolg")}, 
+        function(result) {console.log("Fehler")}
+    );}
 
-    try {
+async function doItDiscoveryForm(tags) {
         var response = await fetch(url, {
             method: "GET",
             headers: {
@@ -201,9 +205,6 @@ async function handleDiscoveryForm(event) {
             console.log("Tags loaded via AJAX:", tags);
             updateView(tags);
         }
-    } catch (e) {
-        console.log("Fetch Error: " + e);
-    }
 }
 
 //trso1014
@@ -216,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var discoveryForm = document.getElementById("discoveryFilterForm"); 
 
     if (tagForm) {
-        tagForm.addEventListener("submit", handleTagForm);
+        tagForm.addEventListener("submit", handleTagForm())
     }
 
     if (discoveryForm) {

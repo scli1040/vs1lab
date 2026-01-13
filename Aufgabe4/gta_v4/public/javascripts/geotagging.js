@@ -132,8 +132,7 @@ function updateView(tagList) {
  * AJAX Handler for Tagging Form
  */
 async function handleTagForm(event) {
-    event.preventDefault(); // Standard-Submit wird hier verhindert
-
+    
     var lat = document.getElementById("latitude").value;
     var lon = document.getElementById("longitude").value;
     var name = document.getElementById("name").value;
@@ -141,68 +140,66 @@ async function handleTagForm(event) {
 
     if (!lat || !lon || !name) return;
 
-    var geotag = {
+    var geotag = {      //Werte ausgelesen und in geotag-Objekt eingefuegt
         latitude: parseFloat(lat),
         longitude: parseFloat(lon),
         name: name,
         hashtag: hashtag
     };
 
-    try {
-        var response = await fetch("/api/geotags", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(geotag)
-        });
+    
+    var response = await fetch("/api/geotags", { //fetch mit Request-Objekt -> gibt response-Objekt zurueck
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(geotag)
+    });
 
-        if (response.status === 201) { // Created
-            console.log("GeoTag created.");
-            // Liste aktualisieren durch Suche auslösen (ohne Suchbegriff = Umgebungssuche)
-            handleDiscoveryForm(null); 
-        } else {
-            console.log("Error creating GeoTag");
-        }
-    } catch (e) {
-        console.log("Fetch Error: " + e);
+    if (response.status === 201) { // Created
+        var result = await response.json();
+        console.log("GeoTag added:", result);
+
+        const nearbyGeoTagsRes = await fetch('/api/geotags?latitude='+lat+'&longitude='+lon,
+            {
+            method: 'GET', 
+            headers: {"Accept":"application/json"}
+             }
+        )
+
+        if(nearbyGeoTagsRes.ok){
+        console.log("Got nearby Tags");
+        const nearbyGeoTags = await nearbyGeoTagsRes.json();
+        updateView(nearbyGeoTags);
+        }        
     }
+    else{
+        console.error("Failed adding GeoTag", res.statusText());
+    }
+    
 }
 
 /**
  * AJAX Handler for Discovery Form
  */
 async function handleDiscoveryForm(event) {
-    if (event) event.preventDefault();
 
     var lat = document.getElementById("discovery-latitude").value;
     var lon = document.getElementById("discovery-longitude").value;
     var searchterm = document.getElementById("searchterm") ? document.getElementById("searchterm").value : "";
 
-    // URL zusammenbauen
-    var url = "/api/geotags?latitude=" + lat + "&longitude=" + lon;
-    if (searchterm) {
-        url += "&searchterm=" + encodeURIComponent(searchterm);
-    }
-
-    // Überprüfung AJAX-Aufruf
-    console.log("Sending AJAX request to:", url);
-
-    try {
-        var response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        });
-
-        if (response.ok) {
-            var tags = await response.json();
-            console.log("Tags loaded via AJAX:", tags);
-            updateView(tags);
+   var res = await fetch('/api/geotags?latitude='+lat+'&longitude='+lon+'&searchterm='+searchterm,{
+        method: "GET",
+        headers: {
+            'Accept':'application/json'
         }
-    } catch (e) {
-        console.log("Fetch Error: " + e);
+    });
+
+    if(res.ok){
+        const tags = await res.json();
+        console.log("Discoveryform submitted und fetch ok");
+        console.log(tags);
+        updateView(tags);
     }
 }
 
@@ -215,11 +212,19 @@ document.addEventListener("DOMContentLoaded", () => {
     var tagForm = document.getElementById("tag-form");
     var discoveryForm = document.getElementById("discoveryFilterForm"); 
 
-    if (tagForm) {
-        tagForm.addEventListener("submit", handleTagForm);
+     if(tagForm){
+        tagForm.addEventListener("submit", async (event) => {
+            console.log("In Ajax Post Methode");
+            event.preventDefault();
+            handleTagForm();
+        });
     }
 
-    if (discoveryForm) {
-        discoveryForm.addEventListener("submit", handleDiscoveryForm);
+    if(discoveryForm){
+        discoveryForm.addEventListener("submit", async (event) =>{
+            console.log("In Ajax Discovery Form");
+            event.preventDefault();
+            handleDiscoveryForm();        
+        });
     }
 });

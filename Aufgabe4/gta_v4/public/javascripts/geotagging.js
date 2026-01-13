@@ -110,9 +110,9 @@ function updateView(tagList) {
     // 1. Liste aktualisieren
     var discoveryResults = document.getElementById("discoveryResults");
     if (discoveryResults) {
-        discoveryResults.innerHTML = ""; // Liste leeren
+        discoveryResults.innerHTML = ""; // angezeigte Liste leeren
 
-        tagList.forEach(function(tag) {
+        tagList.forEach(function(tag) {     //fuer jedes Element im tagList-Array ein HTML-Listenelement hinzufuegen
             var li = document.createElement("li");
             li.innerHTML = tag.name + " (" + tag.latitude + ", " + tag.longitude + ") " + tag.hashtag;
             discoveryResults.appendChild(li);
@@ -120,10 +120,10 @@ function updateView(tagList) {
     }
 
     // 2. Karte aktualisieren
-    var latInput = document.getElementById("latitude");
+    var latInput = document.getElementById("latitude");     //Position auslesen
     var lonInput = document.getElementById("longitude");
     
-    if (window.mapManager && latInput && lonInput) {
+    if (window.mapManager && latInput && lonInput) {        //Wenn Werte gegeben, mit diesen Karte akualisieren
         window.mapManager.updateMarkers(latInput.value, lonInput.value, tagList);
     }
 }
@@ -133,14 +133,14 @@ function updateView(tagList) {
  */
 async function handleTagForm() {
     
-    var lat = document.getElementById("latitude").value;
+    var lat = document.getElementById("latitude").value;       //Werte aus Tag Form auslesen
     var lon = document.getElementById("longitude").value;
     var name = document.getElementById("name").value;
     var hashtag = document.getElementById("hashtag").value;
 
-    if (!lat || !lon || !name) return;
+    if (!lat || !lon || !name) return;     //Abbruch, wenn ein Wert fehlt 
 
-    var geotag = {      //Werte ausgelesen und in geotag-Objekt eingefuegt
+    var geotag = {      //Werte auslesen und in geotag-Objekt einfuegen
         latitude: parseFloat(lat),
         longitude: parseFloat(lon),
         name: name,
@@ -148,29 +148,29 @@ async function handleTagForm() {
     };
 
     
-    var response = await fetch("/api/geotags", { //fetch mit Request-Objekt -> gibt response-Objekt zurueck
-        method: "POST",
+    var response = await fetch("/api/geotags", { //fetch mit Request-Objekt mit neuem Goetag-> gibt response-Objekt zurueck
+        method: "POST", 
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json"      //MIME-Type für JSON im HTTP-Header Content-Type, damit der Server den Inhalt erkennt.
         },
         body: JSON.stringify(geotag)
     });
 
-    if (response.status === 201) { // Created
-        var result = await response.json();
-        console.log("GeoTag added:", result);
+    if (response.status === 201) {              // Wenn response-Objekt zurueckgegeben wurde
+        var result = await response.json();     //in JS-Objekt umwandeln
+        console.log("GeoTag added:", result);   //Ausgabe zur Kontrolle
 
         const nearbyGeoTagsRes = await fetch('/api/geotags?latitude='+lat+'&longitude='+lon,
-            {
-            method: 'GET', 
-            headers: {"Accept":"application/json"}
+            {                                   //mit fetch Elemente aus der Umgebung anfordern
+            method: 'GET',                      
+            headers: {"Accept":"application/json"} 
              }
         )
 
-        if(nearbyGeoTagsRes.ok){
+        if(nearbyGeoTagsRes.ok){                //wenn angeforderte Elemente erfolgreich zurueckgegeben wurden
             console.log("Got nearby Tags");
-            const nearbyGeoTags = await nearbyGeoTagsRes.json();
-            updateView(nearbyGeoTags);
+            const nearbyGeoTags = await nearbyGeoTagsRes.json();    //Diese in JS-Objekte umwandeln
+            updateView(nearbyGeoTags);          //und diese in die uptadeView-Funktion von oben eingeben
         }        
     }
     else{
@@ -184,22 +184,22 @@ async function handleTagForm() {
  */
 async function handleDiscoveryForm() {
 
-    var lat = document.getElementById("discovery-latitude").value;
+    var lat = document.getElementById("discovery-latitude").value;      //Werte aus Discovery Form auslesen
     var lon = document.getElementById("discovery-longitude").value;
     var searchterm = document.getElementById("searchterm") ? document.getElementById("searchterm").value : "";
 
    var res = await fetch('/api/geotags?latitude='+lat+'&longitude='+lon+'&searchterm='+searchterm,{
-        method: "GET",
+        method: "GET",                  //mit fetch und des ausgelesenen Werten die Geotags abfragen
         headers: {
             'Accept':'application/json'
         }
     });
 
-    if(res.ok){
-        const tags = await res.json();
+    if(res.ok){                             //wenn erfolgreich
+        const tags = await res.json();      //Response in JS-Objekt umwandeln
         console.log("Discoveryform submitted und fetch ok");
         console.log(tags);
-        updateView(tags);
+        updateView(tags);   //Geotags aus dem Response in die Methode updateView eingeben 
     }
 }
 
@@ -215,16 +215,16 @@ document.addEventListener("DOMContentLoaded", () => {
      if(tagForm){
         tagForm.addEventListener("submit", async (event) => {
             console.log("In Ajax Post Methode");
-            event.preventDefault();
-            handleTagForm();
+            event.preventDefault();     //standardmaeßiges Absenden des Formulars verhindert
+            handleTagForm();            //stattdessen wird Funktion mit fetch API aufgerufen
         });
     }
 
     if(discoveryForm){
         discoveryForm.addEventListener("submit", async (event) =>{
             console.log("In Ajax Discovery Form");
-            event.preventDefault();
-            handleDiscoveryForm();        
+            event.preventDefault();     //standardmaeßiges Absenden des Formulars verhindert
+            handleDiscoveryForm();      //stattdessen wird Funktion mit fetch API aufgerufen  
         });
     }
 });

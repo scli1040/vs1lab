@@ -156,7 +156,7 @@ async function handleTagForm() {
         body: JSON.stringify(geotag)
     });
 
-    if (response.status === 201) {              // Wenn response-Objekt zurueckgegeben wurde
+    if (response.ok) {              // Wenn response-Objekt zurueckgegeben wurde
         var result = await response.json();     //in JS-Objekt umwandeln
         console.log("GeoTag added:", result);   //Ausgabe zur Kontrolle
 
@@ -200,6 +200,9 @@ async function handleDiscoveryForm() {
         console.log("Discoveryform submitted und fetch ok");
         console.log(tags);
         updateView(tags);   //Geotags aus dem Response in die Methode updateView eingeben 
+    } 
+    else{
+        console.error("Failed searching GeoTag", res.statusText());
     }
 }
 

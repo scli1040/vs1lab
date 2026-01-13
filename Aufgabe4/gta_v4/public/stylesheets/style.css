@@ -8,8 +8,27 @@
 
 /* Global styling */
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInList {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  } to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 html {
   box-sizing: border-box;
+  animation: fadeIn 0.5s ease-in;
 }
 
 * {
@@ -34,7 +53,7 @@ html {
 /* HTML element styles */
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 1rem "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -158,6 +177,10 @@ main{
   padding: 30px;
 }
 
+input[type=submit]:active {
+  transform: translateY(1px);
+}
+
 
 /* ### TODO ### Styles for Tagging component */
 /*trso1014*/
@@ -208,6 +231,7 @@ li {
   padding: 2%;
   margin: 2% 0%;
   list-style: none;
+  animation: fadeInList 0.4s ease-in-out;
 }
 
 /* ### TODO ### Styles for Footer Component */

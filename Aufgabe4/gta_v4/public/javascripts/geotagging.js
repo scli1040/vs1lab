@@ -128,10 +128,9 @@ function updateView(tagList) {
     }
 }
 
-/**
- * AJAX Handler for Tagging Form
- */
-async function handleTagForm() {
+
+
+ function readTagForm() {
     
     var lat = document.getElementById("latitude").value;       //Werte aus Tag Form auslesen
     var lon = document.getElementById("longitude").value;
@@ -140,44 +139,18 @@ async function handleTagForm() {
 
     if (!lat || !lon || !name) return;     //Abbruch, wenn ein Wert fehlt 
 
-    var geotag = {      //Werte auslesen und in geotag-Objekt einfuegen
+     var geotag = {      //Werte auslesen und in geotag-Objekt einfuegen
         latitude: parseFloat(lat),
         longitude: parseFloat(lon),
         name: name,
         hashtag: hashtag
     };
 
-    
-    var response = await fetch("/api/geotags", { //fetch mit Request-Objekt mit neuem Goetag-> gibt response-Objekt zurueck
-        method: "POST", 
-        headers: {
-            "Content-Type": "application/json"      //MIME-Type für JSON im HTTP-Header Content-Type, damit der Server den Inhalt erkennt.
-        },
-        body: JSON.stringify(geotag)
-    });
-
-    if (response.ok) {              // Wenn response-Objekt zurueckgegeben wurde
-        var result = await response.json();     //in JS-Objekt umwandeln
-        console.log("GeoTag added:", result);   //Ausgabe zur Kontrolle
-
-        const nearbyGeoTagsRes = await fetch('/api/geotags?latitude='+lat+'&longitude='+lon,
-            {                                   //mit fetch Elemente aus der Umgebung anfordern
-            method: 'GET',                      
-            headers: {"Accept":"application/json"} 
-             }
-        )
-
-        if(nearbyGeoTagsRes.ok){                //wenn angeforderte Elemente erfolgreich zurueckgegeben wurden
-            console.log("Got nearby Tags");
-            const nearbyGeoTags = await nearbyGeoTagsRes.json();    //Diese in JS-Objekte umwandeln
-            updateView(nearbyGeoTags);          //und diese in die uptadeView-Funktion von oben eingeben
-        }        
-    }
-    else{
-        console.error("Failed adding GeoTag", res.statusText());
-    }
+    return geotag;
     
 }
+
+
 
 /**
  * AJAX Handler for Discovery Form
@@ -195,15 +168,7 @@ async function handleDiscoveryForm() {
         }
     });
 
-    if(res.ok){                             //wenn erfolgreich
-        const tags = await res.json();      //Response in JS-Objekt umwandeln
-        console.log("Discoveryform submitted und fetch ok");
-        console.log(tags);
-        updateView(tags);   //Geotags aus dem Response in die Methode updateView eingeben 
-    } 
-    else{
-        console.error("Failed searching GeoTag", res.statusText());
-    }
+    return await res.json();      //Response in JS-Objekt umwandeln
 }
 
 //trso1014
@@ -219,7 +184,28 @@ document.addEventListener("DOMContentLoaded", () => {
         tagForm.addEventListener("submit", async (event) => {
             console.log("In Ajax Post Methode");
             event.preventDefault();     //standardmaeßiges Absenden des Formulars verhindert
-            handleTagForm();            //stattdessen wird Funktion mit fetch API aufgerufen
+            
+            var geotag = readTagForm();
+
+            fetch("/api/geotags", { //fetch mit Request-Objekt mit neuem Goetag-> gibt response-Objekt zurueck
+                    method: "POST", 
+                    headers: {
+                         "Content-Type": "application/json"      
+                    },              //MIME-Type für JSON im HTTP-Header Content-Type, damit der Server den Inhalt erkennt.
+                    body: JSON.stringify(geotag)
+            })
+                .then(response => response.json())  // JSON-Response in JS umwandeln
+                .then(result => console.log("GeoTag added:", result))   //Ausgabe zur Kontrolle)
+                .catch(error => console.error("Fehler:", error));  
+            
+                
+            fetch('/api/geotags?latitude='+geotag.latitude+'&longitude='+geotag.longitude, {   //Geotags aus aktueller Umgebung holen                             //mit fetch Elemente aus der Umgebung anfordern
+                    method: 'GET',                      
+                    headers: {"Accept":"application/json"} 
+            })
+                .then(response => response.json())                  // JSON-Response in JS umwandeln
+                .then(nearbyGeoTags => updateView(nearbyGeoTags))   //mit Geotags Ansicht aktualisieren
+                .catch(error => console.error("Fehler:", error));    
         });
     }
 
@@ -227,7 +213,11 @@ document.addEventListener("DOMContentLoaded", () => {
         discoveryForm.addEventListener("submit", async (event) =>{
             console.log("In Ajax Discovery Form");
             event.preventDefault();     //standardmaeßiges Absenden des Formulars verhindert
-            handleDiscoveryForm();      //stattdessen wird Funktion mit fetch API aufgerufen  
+            
+            handleDiscoveryForm()      //stattdessen wird Funktion mit fetch API aufgerufen  
+                .then(geotags => console.log(geotags))
+                .then(geotags => updateView(geotags))
+                .catch(error => console.error("Fehler:", error)); 
         });
     }
 });

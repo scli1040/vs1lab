@@ -215,7 +215,10 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();     //standardmaeßiges Absenden des Formulars verhindert
             
             handleDiscoveryForm()      //stattdessen wird Funktion mit fetch API aufgerufen  
-                .then(geotags => console.log(geotags))
+                .then(geotags => {
+                    console.log(geotags);
+                    return geotags;   
+                })
                 .then(geotags => updateView(geotags))
                 .catch(error => console.error("Fehler:", error)); 
         });
